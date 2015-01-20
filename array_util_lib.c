@@ -37,7 +37,33 @@ ArrayUtil resize(ArrayUtil util, int length){
 };
 
 int findIndex(ArrayUtil util, void* element){
-
+	int length = util.length;
+	int i,j,count=0,index=-1;
+	int* array = (int*) util.base;
+	int base_array = (int)element;
+	printf("%d\n",base_array );
+	for(i=0;i<length;i++){
+		 if(array[i] == base_array)
+		 	count++;
+		    break;
+	}
+	
 };
 
+// int i,j,count=0,index=-1;
+// 		for (i = 0; i < stringlen; i++){
+// 			for(j=0;j<sbstrlen;j++){
+// 				if(string[i+j] == substring[j]){
+// 					count++;
+// 				}
+// 			}
+// 			if(count == sbstrlen){
+// 				index = i;
+// 				break;
+// 			}
+
+// 			count=0;
+// 		}
+// 	return index;
+// };
 

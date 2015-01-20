@@ -2,3 +2,7 @@
 *.o
 *.exe.*
 *TestRunner.c
+array_util_test.c
+ctest-0.0.4.tgz
+expr_assert.h
+sampleTest.c
