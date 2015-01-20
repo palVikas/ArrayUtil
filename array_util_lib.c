@@ -28,10 +28,15 @@ ArrayUtil create(int typeSize, int length){
 };
 
 ArrayUtil resize(ArrayUtil util, int length){
-	int i;
+	void *newArray;
+	int new_length = (util.typeSize)*length;
+	newArray = realloc(util.base,new_length);
+	util.base = newArray;
+	util.length = new_length;
+	return util;
+};
 
-	ArrayUtil array1;
-
+int findIndex(ArrayUtil util, void* element){
 
 };
 

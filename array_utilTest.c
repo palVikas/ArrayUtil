@@ -92,30 +92,35 @@ void test_for_the_ArrayUtil_for_charecter_are_equal(){
 
     assertEqual(areEqual(array1, array2),0);
 };
-void test_for_create_new_array(){
+void test_for_create_new_array_of_integertype(){
 	ArrayUtil newArray;
-	newArray = create(3,5);
-    assertEqual(newArray.typeSize,3);
+	newArray = create(sizeof(int),5);
+    assertEqual(newArray.typeSize,4);
     assertEqual(newArray.length,5);
 }
 
-void test_for_create_new_array_of_length6(){
+void test_for_create_new_array_of_charectertype(){
 	ArrayUtil array;
-	array = create(4,6);
+	array = create(sizeof(char),6);
+    assertEqual(array.typeSize,1);
+    assertEqual(array.length,6);
+};
+
+void test_for_create_new_array_of_StringType(){
+	ArrayUtil array;
+	array = create(sizeof(char*),6);
     assertEqual(array.typeSize,4);
     assertEqual(array.length,6);
 };
 
-
-void test_ArrayUtil_resize_array_shoud_give_0_at_index_5(){
-	int arr[]={1,2,3,4,5};
+void test_ArrayUtil_resize_array_shoud_give_0_at_index2(){
 	int *resArray;
 	ArrayUtil array,resizeArray;
-	array.base = arr;
-	array.typeSize = sizeof(int);
-	array.length = 5;
+	array = create(sizeof(int),5);
 	resizeArray=resize(array,4);
 	resArray = resizeArray.base;
-	assertEqual(resArray[3],4);
+	assertEqual(resArray[2],0);
+	assertEqual(resArray[1],0);
+	assertEqual(areEqual(array,resizeArray),0);
 };
 
