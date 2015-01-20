@@ -39,7 +39,7 @@ void test_for_the_ArrayUtil_for_int_are_equall2(){
     assertEqual(areEqual(array1, array2),1);
 };
 
-void test_for_the_ArrayUtil_for_float_are_equall(){
+void test_of_ArrayUtil_for_the_float_are_equall(){
 	float first_array[]={1.0,2.6,3.2,4.1};
 	float second_array[]={1.0,2.6,3.2,4.1};
 
@@ -71,7 +71,6 @@ void test_for_the_ArrayUtil_for_float_are_not_equall(){
 	array2.base = &second_array;
 	array2.typeSize = sizeof(float);
 	array2.length = 4;
-
     assertEqual(areEqual(array1, array2),0);
 };
 
@@ -160,18 +159,6 @@ void test_ArrayUtil_to_find_indexOf_float_type_value(){
 	index = findIndex(array, &y);
 	assertEqual(index, -1);
 };
-
-// void test_ArrayUtil_to_find_indexOf_char_type_value(){
-// 	char x ='c';
-// 	int index;
-// 	char arr[] = {'c','d','e','f','e'};
-// 	ArrayUtil array;
-// 	array.base = &arr;
-// 	array.typeSize = sizeof(char);
-// 	array.length = 5;
-// 	index = findIndex(array, &x);
-// 	assertEqual(index,1);
-// }
 
 void test_ArrayUtil_dispose_to_free_the_memory_allocated_for_the_intType_array(){
 	ArrayUtil array1,array2;

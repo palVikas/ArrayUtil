@@ -5,11 +5,12 @@
 
 int areEqual( ArrayUtil array1, ArrayUtil array2){
 	int i;
-	int* base1 = array1.base;
-	int* base2 = array2.base;
-	int max_length = (array1.length < array2.length) ? array2.length :array1.length;
+	char* base1 = array1.base;
+	char* base2 = array2.base;
+	int max_length = (array1.length < array2.length) ?(array2.length*array2.typeSize) 
+	:( array1.length*array1.typeSize);
 
-	if(array1.length != array2.length && array1.typeSize != array2.typeSize)
+	if(array1.length != array2.length || array1.typeSize != array2.typeSize)
 		return 0;
 
 	for(i=0;i<max_length;i++){
@@ -17,7 +18,7 @@ int areEqual( ArrayUtil array1, ArrayUtil array2){
 				return 0;
 			}
 
-		return 1;
+	return 1;
 };
 
 ArrayUtil create(int typeSize, int length){
