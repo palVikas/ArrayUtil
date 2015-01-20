@@ -7,14 +7,17 @@ int areEqual( ArrayUtil array1, ArrayUtil array2){
 	int i;
 	int* base1 = array1.base;
 	int* base2 = array2.base;
-	if(array1.length == array2.length && array1.typeSize == array2.typeSize){
-		for(i=0;i<array1.length;i++){
+	int max_length = (array1.length < array2.length) ? array2.length :array1.length;
+
+	if(array1.length != array2.length && array1.typeSize != array2.typeSize)
+		return 0;
+
+	for(i=0;i<max_length;i++){
 			if(base1[i] != base2[i])
 				return 0;
 			}
+
 		return 1;
-	}
-	return 0;
 };
 
 ArrayUtil create(int typeSize, int length){
@@ -29,27 +32,30 @@ ArrayUtil create(int typeSize, int length){
 
 ArrayUtil resize(ArrayUtil util, int length){
 	void *newArray;
-	int new_length = (util.typeSize)*length;
-	newArray = realloc(util.base,new_length);
+	newArray = realloc(util.base,length);
 	util.base = newArray;
-	util.length = new_length;
+	util.length = length;
 	return util;
 };
 
 int findIndex(ArrayUtil util, void* element){
 	int length = util.length;
-	int i,j,count=0,index=-1;
+	int i;
 	int* array = (int*) util.base;
 	int* base_array = (int*) element;
 	for(i=0;i<length;i++){
-		 	if(array[i] == base_array[0]){
-		 		count++;
+		 	if(array[i] == *base_array){
+		 		return i;
 		 	}
-			if(count>0)
-			index =i;
-			count=0;
 	}
-	return index;
+	return -1;
+};
+
+void dispose(ArrayUtil util){
+	free(util.base);
+	util.length=0;
+	util.typeSize=0;
+	util.base =0;
 };
 
 
