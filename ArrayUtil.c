@@ -60,13 +60,24 @@ void dispose(ArrayUtil util){
 	util.base =0;
 };
 
-void* findFirst(ArrayUtil util,MatchFunc *isEven,void* hint){
+void* findFirst(ArrayUtil util,MatchFunc *match,void* hint){
 	int i;
 	char *base = (char*)util.base;
 	for(i=0;i<(util.length*util.typeSize);i=i+util.typeSize){
-		if(isEven(hint,(void*)&base[i])==1)
+		if(match(hint,(void*)&base[i])==1)
 			return (void*)&base[i];
 	}
 	return NULL;
 };
 
+
+void* findLast(ArrayUtil util, MatchFunc *match, void* hint){
+	int i;
+	char *base = (char*)util.base;
+	int length = (util.length*util.typeSize);
+	for(i=length-util.typeSize;i >= 0;i=i-util.typeSize){
+		if(match(hint,(void*)&base[i])==1)
+			return (void*)&(base[i]);
+	}
+	return NULL;
+}

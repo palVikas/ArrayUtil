@@ -154,9 +154,9 @@ int isEvenNumber(void* hint , void* element){
 void test_for_findFirst_gives_the_first_element_of_an_array(){
 	int hint = 2;
 	int *result;
-	MatchFunc *isEven = &isEvenNumber;
+	MatchFunc *match = &isEvenNumber;
 	ArrayUtil util = {(int[]){3,5,8,8,7,2},sizeof(int),6};
-	result = (int*)findFirst(util,isEven,&hint);
+	result = (int*)findFirst(util,match,&hint);
 	assertEqual(*result,8);
 }
 
@@ -167,9 +167,9 @@ int isCompareCharecter(void* hint,void* element){
 void test_for_findFirst_gives_the_first_element_of_charecter_an_array(){
 	char hint = 'c';
 	char *result;
-	MatchFunc *isCompare = &isCompareCharecter;
+	MatchFunc *match = &isCompareCharecter;
 	ArrayUtil util = {(char[]){'a','b','c','c','d','c'},sizeof(char),6};
-	result = findFirst(util,isCompare,&hint);
+	result = findFirst(util,match,&hint);
 	assertEqual(*result,'c');
 }
 
@@ -181,8 +181,37 @@ int isLessThanTheHints(void* hint,void* element){
 void test_for_findFirst_gives_the_first_element_of_greater_than_float_value_an_array(){
 	float hint = 6.3;
 	float *result;
-	MatchFunc *isCompare = &isLessThanTheHints;
+	MatchFunc *match = &isLessThanTheHints;
 	ArrayUtil util = {(float[]){2.3,4.5,6.3,4.5,6.0},sizeof(float),5};
-	result = findFirst(util,isCompare,&hint);
+	result = findFirst(util,match,&hint);
+	assertEqual(*result,2.3);
+
+};
+
+void test_for_findLast_gives_the_last_element_of_an_array(){
+	int hint = 2;
+	int *result;
+	MatchFunc *match = &isEvenNumber;
+	ArrayUtil util = {(int[]){3,5,8,8,7,2,5},sizeof(int),7};
+	result = findLast(util,match,&hint);
+	assertEqual(*result,2);
+};
+
+void test_for_findLast_gives_the_null_if_charecter_is_not_existing_in_an_array(){
+	char hint = 'e';
+	char *result;
+	MatchFunc *match = &isCompareCharecter;
+	ArrayUtil util = {(char[]){'a','b','c','c','d','c'},sizeof(char),6};
+	result = (char*)findFirst(util,match,&hint);
+	assert(result == NULL);
+}
+
+
+void test_for_findLast_gives_the_last_element_of_less_than_float_value_an_array(){
+	float hint = 6.3;
+	float *result;
+	MatchFunc *match = &isLessThanTheHints;
+	ArrayUtil util = {(float[]){2.3,4.5,6.3,4.5,6.0},sizeof(float),5};
+	result = findFirst(util,match,&hint);
 	assertEqual(*result,2.3);
 };
