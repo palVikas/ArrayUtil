@@ -145,5 +145,44 @@ void test_ArrayUtil_dispose_to_free_the_memory_allocated_for_the_charType_array(
 	array2 = create(sizeof(char*),5);
 	dispose(array1);
 	dispose(array2);
+}
+
+int isEvenNumber(void* hint , void* element){
+		return ((*(int*)element) % (*(int*)hint)==0) ;
 };
 
+void test_for_findFirst_gives_the_first_element_of_an_array(){
+	int hint = 2;
+	int *result;
+	MatchFunc *isEven = &isEvenNumber;
+	ArrayUtil util = {(int[]){3,5,8,8,7,2},sizeof(int),6};
+	result = (int*)findFirst(util,isEven,&hint);
+	assertEqual(*result,8);
+}
+
+int isCompareCharecter(void* hint,void* element){
+	return ((*(char*)hint) == (*(char*)element));
+}
+
+void test_for_findFirst_gives_the_first_element_of_charecter_an_array(){
+	char hint = 'c';
+	char *result;
+	MatchFunc *isCompare = &isCompareCharecter;
+	ArrayUtil util = {(char[]){'a','b','c','c','d','c'},sizeof(char),6};
+	result = findFirst(util,isCompare,&hint);
+	assertEqual(*result,'c');
+}
+
+int isLessThanTheHints(void* hint,void* element){
+	return (*(float*)element) < (*(float*)hint);
+
+}
+
+void test_for_findFirst_gives_the_first_element_of_greater_than_float_value_an_array(){
+	float hint = 6.3;
+	float *result;
+	MatchFunc *isCompare = &isLessThanTheHints;
+	ArrayUtil util = {(float[]){2.3,4.5,6.3,4.5,6.0},sizeof(float),5};
+	result = findFirst(util,isCompare,&hint);
+	assertEqual(*result,2.3);
+};
