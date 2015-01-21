@@ -5,15 +5,13 @@
 
 int areEqual( ArrayUtil array1, ArrayUtil array2){
 	int i;
-	char* base1 = array1.base;
-	char* base2 = array2.base;
-	int max_length = (array1.length < array2.length) ?(array2.length*array2.typeSize) 
-	:( array1.length*array1.typeSize);
+	char* base1 = (char*)array1.base;
+	char* base2 = (char*)array2.base;
 
 	if(array1.length != array2.length || array1.typeSize != array2.typeSize)
 		return 0;
 
-	for(i=0;i<max_length;i++){
+	for(i=0;i<(array1.length)*array1.typeSize;i++){
 			if(base1[i] != base2[i])
 				return 0;
 			}
@@ -32,21 +30,24 @@ ArrayUtil create(int typeSize, int length){
 };
 
 ArrayUtil resize(ArrayUtil util, int length){
-	void *newArray;
-	newArray = realloc(util.base,length);
-	util.base = newArray;
+	int i;
+	util.base = realloc(util.base,length*util.typeSize);
+	for(i=util.length;i<length;++i){
+		((int*)util.base)[i]=0;
+	}
 	util.length = length;
 	return util;
 };
 
+
 int findIndex(ArrayUtil util, void* element){
 	int length = util.length;
 	int i;
-	int* array = (int*) util.base;
-	int* base_array = (int*) element;
-	for(i=0;i<length;i++){
+	char* array = (char*) util.base;
+	char* base_array = (char*) element;
+	for(i=0;i<length*util.typeSize;i=i+util.typeSize){
 		 	if(array[i] == *base_array){
-		 		return i;
+		 		return i/util.typeSize;
 		 	}
 	}
 	return -1;
